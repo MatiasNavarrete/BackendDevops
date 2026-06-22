@@ -2,7 +2,7 @@ name: Deploy Backend (Spring Boot) to AWS EKS
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ deploy ]
     paths:
       - 'back-Despachos_SpringBoot/**'
       - 'back-Ventas_SpringBoot/**'
