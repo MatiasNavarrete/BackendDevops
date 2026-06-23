@@ -49,3 +49,14 @@ spec:
       targetPort: 8080
   selector:
     app: ventas-app
+env:
+  - name: MYSQL_ROOT_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: mysql-secret
+        key: MYSQL_ROOT_PASSWORD
+  - name: MYSQL_DATABASE
+    valueFrom:
+      secretKeyRef:
+        name: mysql-secret
+        key: MYSQL_DATABASE
