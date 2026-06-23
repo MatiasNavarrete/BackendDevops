@@ -46,23 +46,14 @@ jobs:
           docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_DESPACHOS_REPO }}:${{ github.sha }} -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_DESPACHOS_REPO }}:latest ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
           docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_DESPACHOS_REPO }} --all-tags
           
-          # ☸️ Conectar con el clúster de AWS EKS y Desplegar Backend
-          - name: Update Kubeconfig & Deploy to EKS
-            run: |
-              aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }}
-          
-              kubectl apply -f k8s/01-mysql.yaml
-              kubectl apply -f k8s/02-ventas.yaml
-              kubectl apply -f k8s/03-despachos.yaml
-          
-              # Con este 'if' el pipeline no se va a caer si falta el archivo del frontend
-              if [ -f k8s/04-frontend.yaml ]; then
-                kubectl apply -f k8s/04-frontend.yaml
-              else
-                echo "Saltando 04-frontend.yaml de forma segura."
-              fi
-          
-              if [ -f k8s/05-hpa.yaml ]; then kubectl apply -f k8s/05-hpa.yaml; fi
-          
-              kubectl set image deployment/ventas-deployment ventas-app=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_VENTAS_REPO }}:${{ github.sha }}
-              kubectl set image deployment/despachos-deployment despachos-app=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_DESPACHOS_REPO }}:${{ github.sha }}
+      # ☸️ 3. Conectar con el clúster de AWS EKS y Desplegar Backend
+      - name: Update Kubeconfig & Deploy to EKS
+        run: |
+          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }}
+          kubectl apply -f k8s/01-mysql.yaml
+          kubectl apply -f k8s/02-ventas.yaml
+          kubectl apply -f k8s/03-despachos.yaml
+          if [ -f k8s/04-frontend.yaml ]; then kubectl apply -f k8s/04-frontend.yaml; fi
+          if [ -f k8s/05-hpa.yaml ]; then kubectl apply -f k8s/05-hpa.yaml; fi
+          kubectl set image deployment/ventas-deployment ventas-app=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_VENTAS_REPO }}:${{ github.sha }}
+          kubectl set image deployment/despachos-deployment despachos-app=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_DESPACHOS_REPO }}:${{ github.sha }}
