@@ -39,6 +39,13 @@ kind: Service
 metadata:
   name: despachos-service
   namespace: default
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/api/v1/despachos"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8081"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "3"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "30"
 spec:
   type: LoadBalancer
   ports:

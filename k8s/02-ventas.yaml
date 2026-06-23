@@ -31,7 +31,6 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_DATABASE
-          # ESTA ES LA LÍNEA QUE FALTA PARA EL ERROR "PUBLIC KEY"
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:mysql://mysql-service:3306/innovatech_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
           resources:
@@ -47,6 +46,13 @@ kind: Service
 metadata:
   name: ventas-service
   namespace: default
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/api/v1/ventas"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "8080"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-healthy-threshold: "2"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-unhealthy-threshold: "3"
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-interval: "30"
 spec:
   type: LoadBalancer
   ports:
