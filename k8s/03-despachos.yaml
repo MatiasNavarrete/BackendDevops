@@ -25,23 +25,12 @@ spec:
                   name: mysql-secret
                   key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_DATABASE
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://mysql-service:3306/nombre_tu_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "tu_usuario"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "tu_contraseña"
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_DATABASE
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql-service:3306/db_despachos?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
 ---
 apiVersion: v1
 kind: Service
@@ -54,4 +43,4 @@ spec:
     - port: 8081
       targetPort: 8081
   selector:
-    app: despachos-app
+    app: despachos-service
