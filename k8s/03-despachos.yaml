@@ -19,6 +19,8 @@ spec:
           ports:
             - containerPort: 8081
           env:
+            - name: SERVER_ADDRESS
+              value: "0.0.0.0"
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
