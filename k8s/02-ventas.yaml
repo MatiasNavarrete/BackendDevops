@@ -48,7 +48,7 @@ metadata:
   name: ventas-service
   namespace: default
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 8080
       targetPort: 8080
