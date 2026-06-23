@@ -19,22 +19,19 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_ROOT_PASSWORD
-            - name: MYSQL_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_DATABASE
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://mysql-service:3306/nombre_tu_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "tu_usuario"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "tu_contraseña"
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_ROOT_PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: MYSQL_DATABASE
+          # ESTA ES LA LÍNEA QUE FALTA PARA EL ERROR "PUBLIC KEY"
+          - name: SPRING_DATASOURCE_URL
+            value: "jdbc:mysql://mysql-service:3306/innovatech_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
           resources:
             requests:
               cpu: "100m"

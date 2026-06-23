@@ -30,7 +30,7 @@ spec:
                   name: mysql-secret
                   key: MYSQL_DATABASE
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://mysql-service:3306/db_despachos?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+              value: "jdbc:mysql://mysql-service:3306/innovatech_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
 ---
 apiVersion: v1
 kind: Service
