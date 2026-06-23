@@ -29,6 +29,12 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_DATABASE
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql-service:3306/nombre_tu_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "tu_usuario"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "tu_contraseña"
           resources:
             requests:
               cpu: "100m"
