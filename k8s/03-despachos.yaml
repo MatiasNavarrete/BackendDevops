@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: despachos-app
-          image: 823494846612.dkr.ecr.us-east-1.amazonaws.com/innovatech-despachos:latest
+          image: matiasnavarreted/api-despachos:latest
           ports:
             - containerPort: 8081
           env:
