@@ -1,0 +1,2 @@
+export const API_VENTAS = "http://a49ab6419fd5843e49552ca9f20a5206-1527834845.us-east-1.elb.amazonaws.com:8080/api/v1/ventas";
+export const API_DESPACHOS = "http://a693db33a73c2497c9f8b4430e9930c9-1259462667.us-east-1.elb.amazonaws.com:8081/api/v1/despachos";
