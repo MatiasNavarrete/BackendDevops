@@ -35,7 +35,7 @@ jobs:
       - name: Build and Push - Frontend React
         uses: docker/build-push-action@v4
         with:
-          context: ./frontend_despacho
+          context: ./front_despacho
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/app-frontend:latest
 
