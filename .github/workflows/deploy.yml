@@ -68,6 +68,6 @@ jobs:
 
       - name: Reiniciar Pods para aplicar cambios
         run: |
-          kubectl rollout restart deployment api-ventas
+          kubectl rollout restart deployment ventas-deployment
           kubectl rollout restart deployment api-despachos
           kubectl rollout restart deployment app-frontend
